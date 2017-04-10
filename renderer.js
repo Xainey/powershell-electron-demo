@@ -3,7 +3,9 @@ const $ = require('jquery');
 const powershell = require('node-powershell');
 
 // Testing PowerShell
-$(document).ready(() => {
+$("#getDisk").click(() => {
+    // Get the form input
+    let computer = $('#computerName').val() || 'localhost'
 
     // Create the PS Instance
     let ps = new powershell({
@@ -12,8 +14,8 @@ $(document).ready(() => {
     })
 
     // Load the gun
-    ps.addCommand("./Test-Power", [
-        { GigaWatts: 1.0 }
+    ps.addCommand("./Get-Drives", [
+        { ComputerName: computer }
     ])
 
     // Pull the Trigger
@@ -21,6 +23,7 @@ $(document).ready(() => {
     .then(output => {
         console.log(output)
         console.log(JSON.parse(output))
+        $('#output').html(output)
     })
     .catch(err => {
         console.error(err)

@@ -4,12 +4,32 @@
     <meta charset="UTF-8">
     <title>Diskr</title>
     <link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap.min.css">
+    <style>
+      .top-buffer {
+        margin-top: 1em;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
-      <div class="alert alert-success" role="alert">
-        <strong>Well done!</strong> You successfully read this important alert message.
+
+    <!-- Form -->
+      <div class="row top-buffer">
+        <div class="col-lg-6 mx-auto">
+        <div class="input-group">
+          <input id="computerName" type="text" class="form-control" placeholder="Computer Name">
+          <span class="input-group-btn">
+            <button id="getDisk" class="btn btn-primary" type="button">Get Disk Info!</button>
+          </span>
+        </div>
+        </div>
       </div>
+
+      <!-- Output -->
+      <div class="row justify-content-center">
+        <div id="output" class="col-lg-6 mx-auto"></div>
+      </div>
+
     </div>
   </body>
   <script>
