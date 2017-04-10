@@ -3,7 +3,8 @@ param (
     [string] $ComputerName = 'localhost'
 )
 
- $drives = [System.IO.DriveInfo]::GetDrives() |
+$out = Invoke-Command -ComputerName $ComputerName -ScriptBlock {
+    [System.IO.DriveInfo]::GetDrives() |
     Where-Object {$_.TotalSize} |
     Select-Object   @{Name='Name';     Expr={$_.Name}},
                     @{Name='Label';    Expr={$_.VolumeLabel}},
@@ -11,7 +12,7 @@ param (
                     @{Name='Free(GB)'; Expr={[int32]($_.AvailableFreeSpace / 1GB)}},
                     @{Name='Free(%)';  Expr={[math]::Round($_.AvailableFreeSpace / $_.TotalSize,2)*100}},
                     @{Name='Format';   Expr={$_.DriveFormat}},
-                    @{Name='Type';     Expr={[string]$_.DriveType}},
-                    @{Name='Computer'; Expr={$ComputerName}}
+                    @{Name='Type';     Expr={[string]$_.DriveType}}
+}
 
-$drives | ConvertTo-Json -Compress
+$out | Select-Object * -ExcludeProperty PSComputerName, RunspaceId, PSShowComputerName | ConvertTo-Json -Compress
