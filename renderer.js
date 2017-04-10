@@ -31,6 +31,13 @@ $("#getDisk").click(() => {
         let data = JSON.parse(output)
         console.log(data)
 
+        // Catch Custom Errors
+        if (data.Error) {
+            $('.alert-danger .message').html(data.Error.Message)
+            $('.alert-danger').show()
+            return
+        }
+
         // generate DataTables columns dynamically
         let columns = [];
         Object.keys(data[0]).forEach( key => columns.push({ title: key, data: key }) )
