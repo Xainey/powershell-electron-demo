@@ -20,6 +20,7 @@
     "electron": "~1.6.2"
   },
   "dependencies": {
-    "bootstrap": "^4.0.0-alpha.6"
+    "bootstrap": "^4.0.0-alpha.6",
+    "jquery": "^3.2.1"
   }
 }
