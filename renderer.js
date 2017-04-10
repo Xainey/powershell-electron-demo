@@ -12,12 +12,15 @@ $(document).ready(() => {
     })
 
     // Load the gun
-    ps.addCommand("Get-Process -Name electron")
+    ps.addCommand("./Test-Power", [
+        { GigaWatts: 1.0 }
+    ])
 
     // Pull the Trigger
     ps.invoke()
     .then(output => {
         console.log(output)
+        console.log(JSON.parse(output))
     })
     .catch(err => {
         console.error(err)
