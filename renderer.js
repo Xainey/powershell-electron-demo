@@ -9,6 +9,10 @@ $("#getDisk").click(() => {
     // Get the form input
     let computer = $('#computerName').val() || 'localhost'
 
+    // Clear the Error Messages
+    $('.alert-danger .message').html("")
+    $('.alert-danger').hide()
+
     // Create the PS Instance
     let ps = new powershell({
         executionPolicy: 'Bypass',
@@ -43,6 +47,8 @@ $("#getDisk").click(() => {
     })
     .catch(err => {
         console.error(err)
+        $('.alert-danger .message').html(err)
+        $('.alert-danger').show()
         ps.dispose()
     })
 
