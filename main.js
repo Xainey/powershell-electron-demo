@@ -1,6 +1,7 @@
 const electron = require('electron')
 // Module to control application life.
-const app = electron.app
+// const app = electron.app
+const {app, Menu, dialog} = electron
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
 
@@ -16,7 +17,48 @@ global.sharedObj = {
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
+function createMenu() {
+  const template = [
+    {
+        label: 'View',
+        submenu: [
+          {
+            role: 'reload'
+          },
+          {
+            role: 'forcereload'
+          },
+          {
+            role: 'toggledevtools'
+          }
+        ]
+    },
+    {
+      label: 'Tools',
+      submenu: [
+        {
+          label: 'Check Cred',
+          click () {
+            let user = (global.sharedObj.cred) ? global.sharedObj.cred.user : "Default"
+            dialog.showMessageBox({
+              type: "info",
+              title: "Current Cred",
+              message: `The current user is: ${user}.`
+            })
+          }
+        }
+      ]
+    }
+  ]
+
+  const menu = Menu.buildFromTemplate(template)
+  Menu.setApplicationMenu(menu)
+}
+
 function createWindow () {
+  // Use custom menu
+  createMenu()
+
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600})
 
