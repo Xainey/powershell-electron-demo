@@ -4,7 +4,30 @@ const powershell = require('node-powershell');
 const dt = require('datatables.net')();
 const dtbs = require('datatables.net-bs4')(window, $);
 
-// Testing PowerShell
+// Get Global Variables
+let remote = require('electron').remote;
+
+$('#changeUser').click(() => {
+    let ps = new powershell({
+        executionPolicy: 'Bypass',
+        noProfile: true
+    })
+
+    ps.addCommand('./Convert-CredToJson.ps1', [])
+    ps.invoke()
+    .then(output => {
+        console.log(output)
+        // Set the global Variable
+        remote.getGlobal('sharedObj').cred = JSON.parse(output)
+        // Read the global variable
+        console.log(remote.getGlobal('sharedObj').cred)
+    })
+    .catch(err => {
+        console.dir(err);
+        ps.dispose();
+    })
+})
+
 $("#getDisk").click(() => {
     // Get the form input
     let computer = $('#computerName').val() || 'localhost'

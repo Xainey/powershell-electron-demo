@@ -6,6 +6,7 @@ param (
 $parms = @{
     ComputerName = $ComputerName
     ErrorAction = "Stop"
+    # Credential = Get-Credential
 }
 
 try {
