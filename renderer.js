@@ -7,6 +7,11 @@ const dtbs = require('datatables.net-bs4')(window, $);
 // Get Global Variables
 let remote = require('electron').remote;
 
+// Helper to wrap a string in quotes
+String.prototype.wrap = function () {
+    return `'${this}'`;
+}
+
 $('#changeUser').click(() => {
     let ps = new powershell({
         executionPolicy: 'Bypass',
@@ -42,10 +47,15 @@ $("#getDisk").click(() => {
         noProfile: true
     })
 
+    let commands = [{ ComputerName: computer.wrap() }]
+    let cred = remote.getGlobal('sharedObj').cred
+
+    // If global cred exists, seralize and push it to commands
+    if (cred)
+        commands.push({ JsonUser: JSON.stringify(cred).wrap() })
+
     // Load the gun
-    ps.addCommand("./Get-Drives", [
-        { ComputerName: computer }
-    ])
+    ps.addCommand('./Get-Drives', commands)
 
     // Pull the Trigger
     ps.invoke()

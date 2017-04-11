@@ -1,12 +1,19 @@
 param (
     [Parameter(Mandatory = $false)]
-    [string] $ComputerName = 'localhost'
+    [string] $ComputerName = 'localhost',
+    [Parameter(Mandatory = $false)]
+    [String] $JsonUser
 )
 
 $parms = @{
     ComputerName = $ComputerName
     ErrorAction = "Stop"
-    # Credential = Get-Credential
+}
+
+if ( ! [string]::IsNullOrEmpty($JsonUser) ) {
+    $hash = $JsonUser | ConvertFrom-Json
+    $hash.pass = $hash.pass | ConvertTo-SecureString
+    $parms.Credential = [PSCredential]::new($hash.user, $hash.pass)
 }
 
 try {
