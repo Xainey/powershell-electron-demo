@@ -2,4 +2,4 @@
 
 This demo shows a working sample or using PowerShell with Atom Electron.
 
-For more information, please see the post: [https://xainey.github.io/2017/powershell-electron-demo/][Back to the Frontend | A PowerShell Electron Demo]
+For more information, please see the post: [Back to the Frontend | A PowerShell Electron Demo](https://xainey.github.io/2017/powershell-electron-demo/).
