@@ -18,7 +18,8 @@ $('#changeUser').click(() => {
         noProfile: true
     })
 
-    ps.addCommand('./Convert-CredToJson.ps1', [])
+    let scriptPath = require("path").resolve(__dirname, './Convert-CredToJson.ps1')
+    ps.addCommand(scriptPath, [])
     ps.invoke()
     .then(output => {
         console.log(output)
@@ -55,7 +56,8 @@ $("#getDisk").click(() => {
         commands.push({ JsonUser: JSON.stringify(cred).wrap() })
 
     // Load the gun
-    ps.addCommand('./Get-Drives', commands)
+    let scriptPath = require("path").resolve(__dirname, './Get-Drives.ps1')
+    ps.addCommand(scriptPath, commands)
 
     // Pull the Trigger
     ps.invoke()
