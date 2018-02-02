@@ -19,13 +19,14 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "~1.6.2"
+    "electron": "^1.6.17",
+    "electron-packager": "^10.1.2"
   },
   "dependencies": {
-    "bootstrap": "^4.0.0-alpha.6",
-    "datatables.net": "^1.10.13",
-    "datatables.net-bs4": "^1.10.13",
-    "jquery": "^3.2.1",
-    "node-powershell": "^3.1.1"
+    "bootstrap": "^4.0.0",
+    "datatables.net": "^1.10.16",
+    "datatables.net-bs4": "^1.10.16",
+    "jquery": "^3.3.1",
+    "node-powershell": "^3.3.1"
   }
 }

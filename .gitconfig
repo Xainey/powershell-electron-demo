@@ -1,0 +1,5 @@
+[user]
+	name = PSVortex
+	email = PSVortex@mail.com
+[core]
+	autocrlf = input
