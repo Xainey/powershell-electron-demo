@@ -1,3 +1,4 @@
+.vscode
 node_modules
 dist
 diskr-win32-x64
