@@ -66,6 +66,11 @@ $("#getDisk").click(() => {
         let data = JSON.parse(output)
         console.log(data)
 
+        // In case when we get single object for one drive
+        if (!(Array.isArray(data))) {
+            data = [data]
+        }
+
         // Catch Custom Errors
         if (data.Error) {
             $('.alert-danger .message').html(data.Error.Message)
