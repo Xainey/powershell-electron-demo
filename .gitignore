@@ -2,3 +2,5 @@
 node_modules
 dist
 diskr-win32-x64
+package-lock.json
+yarn.lock
